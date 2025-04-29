@@ -4,7 +4,7 @@
 export const torusCode = `import React, { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useTorusStore } from "../lib/stores/useTorusStore";
+import { useTorusStore, ShapeMode } from "../lib/stores/useTorusStore";
 import { MeshTransmissionMaterial } from "@react-three/drei";
 
 const Torus: React.FC = () => {
@@ -19,7 +19,7 @@ const Torus: React.FC = () => {
     rotationSpeed,
     autoRotate,
     isAnimating,
-    isKnotMode,
+    shapeMode,
   } = useTorusStore();
 
   // Animation to pulse the torus
@@ -49,19 +49,36 @@ const Torus: React.FC = () => {
     if (mesh.current) {
       mesh.current.rotation.set(0, 0, 0);
     }
-  }, [isKnotMode, radius, tubeRadius, tubularSegments, radialSegments]);
+  }, [shapeMode, radius, tubeRadius, tubularSegments, radialSegments]);
+
+  // Generate different geometry based on selected shape mode
+  const renderGeometry = () => {
+    switch (shapeMode) {
+      case ShapeMode.KNOT:
+        return (
+          <torusKnotGeometry
+            args={[radius, tubeRadius, Math.round(tubularSegments * 2), Math.round(radialSegments)]}
+          />
+        );
+      case ShapeMode.WEIRD:
+        return (
+          <dodecahedronGeometry
+            args={[radius, Math.round(radialSegments / 8)]}
+          />
+        );
+      case ShapeMode.TORUS:
+      default:
+        return (
+          <torusGeometry
+            args={[radius, tubeRadius, Math.round(radialSegments), Math.round(tubularSegments)]}
+          />
+        );
+    }
+  };
 
   return (
     <mesh ref={mesh} castShadow receiveShadow>
-      {isKnotMode ? (
-        <torusKnotGeometry
-          args={[radius, tubeRadius, Math.round(tubularSegments * 2), Math.round(radialSegments)]}
-        />
-      ) : (
-        <torusGeometry
-          args={[radius, tubeRadius, Math.round(radialSegments), Math.round(tubularSegments)]}
-        />
-      )}
+      {renderGeometry()}
       
       {wireframe ? (
         <meshStandardMaterial

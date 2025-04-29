@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
 import { torusCode, sceneCode, controlsCode } from "../lib/torusCode";
-import { Copy, Check, Code2 } from "lucide-react";
+import { Copy, Check, Code2, X } from "lucide-react";
 import { useState } from "react";
 
 interface CodeDisplayProps {
@@ -22,7 +22,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ onClose }) => {
   };
 
   return (
-    <Card className="w-full h-full flex flex-col border-t-0 rounded-t-none rounded-b-lg bg-background/95 backdrop-blur-sm">
+    <Card className="w-full max-h-[80vh] flex flex-col border-t-0 rounded-t-none rounded-b-lg bg-background/95 backdrop-blur-sm">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <div>
@@ -31,11 +31,17 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ onClose }) => {
               Code Explorer
             </CardTitle>
             <CardDescription>
-              Examine the code that powers this 3D torus visualization
+              Examine the code that powers this 3D shape visualization
             </CardDescription>
           </div>
-          <Button variant="outline" onClick={onClose}>
-            Close
+          <Button 
+            variant="outline" 
+            onClick={onClose}
+            className="relative hover:bg-destructive/10" 
+            aria-label="Close"
+          >
+            <X className="h-4 w-4" />
+            <span className="sr-only">Close</span>
           </Button>
         </div>
       </CardHeader>
@@ -43,12 +49,12 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ onClose }) => {
       <CardContent className="flex-grow overflow-hidden pb-0">
         <Tabs defaultValue="torus" className="w-full h-full">
           <TabsList className="grid w-full grid-cols-3 mb-4">
-            <TabsTrigger value="torus">Torus Component</TabsTrigger>
+            <TabsTrigger value="torus">Shape Component</TabsTrigger>
             <TabsTrigger value="scene">Scene Setup</TabsTrigger>
             <TabsTrigger value="controls">UI Controls</TabsTrigger>
           </TabsList>
           
-          <div className="relative h-[calc(100%-50px)] overflow-auto">
+          <div className="relative h-[40vh] md:h-[50vh] overflow-auto border rounded-md">
             <TabsContent value="torus" className="h-full m-0">
               <SyntaxHighlighter
                 language="tsx"
@@ -97,8 +103,8 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ onClose }) => {
         </Tabs>
       </CardContent>
       
-      <CardFooter className="pt-4">
-        <div className="flex gap-2">
+      <CardFooter className="pt-4 flex flex-wrap justify-between items-center">
+        <div className="flex flex-wrap gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -113,7 +119,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ onClose }) => {
             ) : (
               <>
                 <Copy className="mr-2 h-4 w-4" />
-                Copy Torus Code
+                Copy Shape Code
               </>
             )}
           </Button>
@@ -156,6 +162,15 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ onClose }) => {
             )}
           </Button>
         </div>
+        
+        <Button 
+          variant="default" 
+          className="mt-2 sm:mt-0" 
+          size="sm" 
+          onClick={onClose}
+        >
+          Close Code View
+        </Button>
       </CardFooter>
     </Card>
   );
