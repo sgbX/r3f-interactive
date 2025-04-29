@@ -4,13 +4,13 @@ import CodeDisplay from "./CodeDisplay";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { Code, Github, Info } from "lucide-react";
-import { useTorusStore } from "../lib/stores/useTorusStore";
+import { useTorusStore, ShapeMode } from "../lib/stores/useTorusStore";
 import { useAudio } from "../lib/stores/useAudio";
 
 const Interface: React.FC = () => {
   const [showCode, setShowCode] = useState(false);
   const { playSuccess } = useAudio();
-  const { isKnotMode } = useTorusStore();
+  const { shapeMode } = useTorusStore();
 
   const toggleCodeDisplay = () => {
     setShowCode(!showCode);
@@ -25,14 +25,27 @@ const Interface: React.FC = () => {
   const showInfo = () => {
     toast.info(
       <div className="space-y-2">
-        <p className="font-semibold">Interactive 3D Torus Explorer</p>
+        <p className="font-semibold">Interactive 3D Shape Explorer</p>
         <p>
           This application demonstrates the capabilities of React Three Fiber and Three.js.
-          Modify the torus properties using the controls and view the source code to learn how it works!
+          Modify the 3D shape properties using the controls and view the source code to learn how it works!
         </p>
       </div>,
       { duration: 5000 }
     );
+  };
+
+  // Function to get the current title based on shape mode
+  const getShapeTitle = () => {
+    switch (shapeMode) {
+      case ShapeMode.KNOT:
+        return "Interactive Torus Knot";
+      case ShapeMode.WEIRD:
+        return "Interactive Weird Shape";
+      case ShapeMode.TORUS:
+      default:
+        return "Interactive Torus";
+    }
   };
 
   return (
@@ -42,7 +55,7 @@ const Interface: React.FC = () => {
         <div className="flex items-center gap-2">
           <div className="bg-background/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md">
             <h1 className="text-xl md:text-2xl font-bold text-primary">
-              {isKnotMode ? "Interactive Torus Knot" : "Interactive Torus"}
+              {getShapeTitle()}
             </h1>
             <p className="text-sm text-muted-foreground">
               Built with React Three Fiber

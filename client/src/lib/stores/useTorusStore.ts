@@ -1,5 +1,12 @@
 import { create } from "zustand";
 
+// Enum for the different shape modes
+export enum ShapeMode {
+  TORUS = "torus",
+  KNOT = "knot",
+  WEIRD = "weird"
+}
+
 interface TorusState {
   // Appearance properties
   color: string;
@@ -17,7 +24,7 @@ interface TorusState {
   isAnimating: boolean;
   
   // Mode toggle
-  isKnotMode: boolean;
+  shapeMode: ShapeMode;
   
   // Actions
   setColor: (color: string) => void;
@@ -29,7 +36,7 @@ interface TorusState {
   setRotationSpeed: (rotationSpeed: number) => void;
   setAutoRotate: (autoRotate: boolean) => void;
   setIsAnimating: (isAnimating: boolean) => void;
-  setIsKnotMode: (isKnotMode: boolean) => void;
+  setShapeMode: (mode: ShapeMode) => void;
   resetToDefaults: () => void;
 }
 
@@ -44,7 +51,7 @@ const DEFAULT_VALUES = {
   rotationSpeed: 1.0,
   autoRotate: true,
   isAnimating: true,
-  isKnotMode: false,
+  shapeMode: ShapeMode.TORUS,
 };
 
 export const useTorusStore = create<TorusState>((set) => ({
@@ -61,7 +68,7 @@ export const useTorusStore = create<TorusState>((set) => ({
   setRotationSpeed: (rotationSpeed: number) => set({ rotationSpeed }),
   setAutoRotate: (autoRotate: boolean) => set({ autoRotate }),
   setIsAnimating: (isAnimating: boolean) => set({ isAnimating }),
-  setIsKnotMode: (isKnotMode: boolean) => set({ isKnotMode }),
+  setShapeMode: (shapeMode: ShapeMode) => set({ shapeMode }),
   
   // Reset to defaults
   resetToDefaults: () => set(DEFAULT_VALUES),

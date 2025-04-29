@@ -1,5 +1,5 @@
 import React from "react";
-import { useTorusStore } from "../lib/stores/useTorusStore";
+import { useTorusStore, ShapeMode } from "../lib/stores/useTorusStore";
 import { Slider } from "./ui/slider";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
@@ -15,7 +15,9 @@ import {
   Rotate3D, 
   RefreshCw, 
   Eye, 
-  EyeOff 
+  EyeOff,
+  Box,
+  CircleOff
 } from "lucide-react";
 
 export const Controls: React.FC = () => {
@@ -38,8 +40,8 @@ export const Controls: React.FC = () => {
     setAutoRotate,
     isAnimating,
     setIsAnimating,
-    isKnotMode,
-    setIsKnotMode,
+    shapeMode,
+    setShapeMode,
     resetToDefaults,
   } = useTorusStore();
 
@@ -54,17 +56,46 @@ export const Controls: React.FC = () => {
     <Card className="w-full rounded-t-none rounded-b-lg bg-background/95 backdrop-blur-sm border-t-0">
       <CardContent className="p-4">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-semibold text-lg text-foreground">Torus Controls</h3>
+          <h3 className="font-semibold text-lg text-foreground">Shape Controls</h3>
           <div className="flex items-center gap-2">
+            {/* Shape toggles for Torus, Knot, and Weird shape */}
             <Toggle
-              pressed={isKnotMode}
-              onPressedChange={setIsKnotMode}
-              aria-label="Toggle Knot Mode"
-              title="Toggle between Torus and Torus Knot"
+              pressed={shapeMode === ShapeMode.TORUS}
+              onPressedChange={() => {
+                setShapeMode(ShapeMode.TORUS);
+                playHit();
+              }}
+              aria-label="Torus Mode"
+              title="Switch to Torus"
               className="w-9 h-9"
-              onClick={() => playHit()}
+            >
+              <CircleOff size={18} />
+            </Toggle>
+            
+            <Toggle
+              pressed={shapeMode === ShapeMode.KNOT}
+              onPressedChange={() => {
+                setShapeMode(ShapeMode.KNOT);
+                playHit();
+              }}
+              aria-label="Knot Mode"
+              title="Switch to Torus Knot"
+              className="w-9 h-9"
             >
               <Rotate3D size={18} />
+            </Toggle>
+            
+            <Toggle
+              pressed={shapeMode === ShapeMode.WEIRD}
+              onPressedChange={() => {
+                setShapeMode(ShapeMode.WEIRD);
+                playHit();
+              }}
+              aria-label="Weird Shape Mode"
+              title="Switch to Weird Shape"
+              className="w-9 h-9"
+            >
+              <Box size={18} />
             </Toggle>
             
             <Toggle
