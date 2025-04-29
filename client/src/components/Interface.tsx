@@ -71,7 +71,7 @@ const Interface: React.FC = () => {
               {getShapeTitle()}
             </h1>
             <p className="text-sm text-muted-foreground">
-              Built with React Three Fiber
+              Created by {new Date().getFullYear()}
             </p>
           </div>
         </div>
