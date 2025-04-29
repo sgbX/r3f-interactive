@@ -18,8 +18,11 @@ const Interface: React.FC = () => {
   };
 
   const openGithubRepo = () => {
-    window.open("https://github.com/pmndrs/react-three-fiber", "_blank");
-    toast.success("Opening React Three Fiber GitHub repo");
+    window.open("https://github.com/pmndrs/react-three-fiber", "_blank", "noopener,noreferrer");
+    toast.success("Opening React Three Fiber GitHub repo", {
+      duration: 3000,
+      position: "top-center"
+    });
   };
 
   const showInfo = () => {
@@ -30,8 +33,15 @@ const Interface: React.FC = () => {
           This application demonstrates the capabilities of React Three Fiber and Three.js.
           Modify the 3D shape properties using the controls and view the source code to learn how it works!
         </p>
+        <p className="text-xs text-muted-foreground mt-2">
+          Try switching between different shape modes using the toggle buttons.
+        </p>
       </div>,
-      { duration: 5000 }
+      { 
+        duration: 5000,
+        position: "top-center",
+        closeButton: true
+      }
     );
   };
 
@@ -69,8 +79,11 @@ const Interface: React.FC = () => {
             size="icon"
             className="rounded-full bg-background/80 backdrop-blur-sm"
             onClick={showInfo}
+            aria-label="Information"
+            title="About this app"
           >
             <Info size={20} />
+            <span className="sr-only">Information</span>
           </Button>
           
           <Button
@@ -78,14 +91,19 @@ const Interface: React.FC = () => {
             size="icon"
             className="rounded-full bg-background/80 backdrop-blur-sm"
             onClick={openGithubRepo}
+            aria-label="GitHub"
+            title="Open GitHub repository"
           >
             <Github size={20} />
+            <span className="sr-only">GitHub</span>
           </Button>
           
           <Button
             variant={showCode ? "default" : "outline"}
             className="rounded-full bg-background/80 backdrop-blur-sm"
             onClick={toggleCodeDisplay}
+            aria-label={showCode ? "Hide Code" : "View Code"}
+            title={showCode ? "Hide code display" : "View source code"}
           >
             <Code size={20} className="mr-2" />
             {showCode ? "Hide Code" : "View Code"}
