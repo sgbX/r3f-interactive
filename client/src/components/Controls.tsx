@@ -1,0 +1,274 @@
+import React from "react";
+import { useTorusStore } from "../lib/stores/useTorusStore";
+import { Slider } from "./ui/slider";
+import { Switch } from "./ui/switch";
+import { Label } from "./ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Card, CardContent } from "./ui/card";
+import { Separator } from "./ui/separator";
+import { Toggle } from "./ui/toggle";
+import { Button } from "./ui/button";
+import { useAudio } from "../lib/stores/useAudio";
+import { 
+  Volume2, VolumeX, 
+  Play, Pause, 
+  Rotate3D, 
+  RefreshCw, 
+  Eye, 
+  EyeOff 
+} from "lucide-react";
+
+export const Controls: React.FC = () => {
+  const {
+    color,
+    setColor,
+    wireframe,
+    setWireframe,
+    tubeRadius,
+    setTubeRadius,
+    radius,
+    setRadius,
+    radialSegments,
+    setRadialSegments,
+    tubularSegments,
+    setTubularSegments,
+    rotationSpeed,
+    setRotationSpeed,
+    autoRotate,
+    setAutoRotate,
+    isAnimating,
+    setIsAnimating,
+    isKnotMode,
+    setIsKnotMode,
+    resetToDefaults,
+  } = useTorusStore();
+
+  const { isMuted, toggleMute, playHit } = useAudio();
+
+  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColor(e.target.value);
+    playHit();
+  };
+
+  return (
+    <Card className="w-full rounded-t-none rounded-b-lg bg-background/95 backdrop-blur-sm border-t-0">
+      <CardContent className="p-4">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-semibold text-lg text-foreground">Torus Controls</h3>
+          <div className="flex items-center gap-2">
+            <Toggle
+              pressed={isKnotMode}
+              onPressedChange={setIsKnotMode}
+              aria-label="Toggle Knot Mode"
+              title="Toggle between Torus and Torus Knot"
+              className="w-9 h-9"
+              onClick={() => playHit()}
+            >
+              <Rotate3D size={18} />
+            </Toggle>
+            
+            <Toggle
+              pressed={autoRotate}
+              onPressedChange={setAutoRotate}
+              aria-label="Toggle Auto Rotation"
+              title="Toggle Auto Rotation"
+              className="w-9 h-9"
+              onClick={() => playHit()}
+            >
+              <RefreshCw size={18} />
+            </Toggle>
+            
+            <Toggle
+              pressed={isAnimating}
+              onPressedChange={setIsAnimating}
+              aria-label="Toggle Animation"
+              title="Toggle Pulse Animation"
+              className="w-9 h-9"
+              onClick={() => playHit()}
+            >
+              {isAnimating ? <Pause size={18} /> : <Play size={18} />}
+            </Toggle>
+            
+            <Toggle
+              pressed={wireframe}
+              onPressedChange={setWireframe}
+              aria-label="Toggle Wireframe"
+              title="Toggle Wireframe Mode"
+              className="w-9 h-9"
+              onClick={() => playHit()}
+            >
+              {wireframe ? <Eye size={18} /> : <EyeOff size={18} />}
+            </Toggle>
+            
+            <Button
+              variant="outline"
+              size="icon"
+              title="Reset to Defaults"
+              onClick={() => {
+                resetToDefaults();
+                playHit();
+              }}
+              className="w-9 h-9"
+            >
+              <RefreshCw size={18} />
+            </Button>
+            
+            <Button
+              variant="outline"
+              size="icon"
+              title={isMuted ? "Unmute" : "Mute"}
+              onClick={toggleMute}
+              className="w-9 h-9"
+            >
+              {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            </Button>
+          </div>
+        </div>
+        
+        <Separator className="my-2" />
+        
+        <Tabs defaultValue="shape" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-4">
+            <TabsTrigger value="shape">Shape</TabsTrigger>
+            <TabsTrigger value="appearance">Appearance</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="shape" className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="radius">Radius: {radius.toFixed(1)}</Label>
+                </div>
+                <Slider
+                  id="radius"
+                  min={0.5}
+                  max={3}
+                  step={0.1}
+                  value={[radius]}
+                  onValueChange={(value) => {
+                    setRadius(value[0]);
+                    playHit();
+                  }}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="tubeRadius">Tube Radius: {tubeRadius.toFixed(2)}</Label>
+                </div>
+                <Slider
+                  id="tubeRadius"
+                  min={0.1}
+                  max={1}
+                  step={0.05}
+                  value={[tubeRadius]}
+                  onValueChange={(value) => {
+                    setTubeRadius(value[0]);
+                    playHit();
+                  }}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="radialSegments">Radial Segments: {Math.round(radialSegments)}</Label>
+                </div>
+                <Slider
+                  id="radialSegments"
+                  min={3}
+                  max={64}
+                  step={1}
+                  value={[radialSegments]}
+                  onValueChange={(value) => {
+                    setRadialSegments(value[0]);
+                    playHit();
+                  }}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="tubularSegments">Tubular Segments: {Math.round(tubularSegments)}</Label>
+                </div>
+                <Slider
+                  id="tubularSegments"
+                  min={3}
+                  max={100}
+                  step={1}
+                  value={[tubularSegments]}
+                  onValueChange={(value) => {
+                    setTubularSegments(value[0]);
+                    playHit();
+                  }}
+                />
+              </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="appearance" className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="color">Color</Label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="color"
+                    id="color"
+                    value={color}
+                    onChange={handleColorChange}
+                    className="w-10 h-10 rounded cursor-pointer border border-input"
+                  />
+                  <div className="text-sm text-muted-foreground">{color}</div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="rotationSpeed">Rotation Speed: {rotationSpeed.toFixed(1)}</Label>
+                </div>
+                <Slider
+                  id="rotationSpeed"
+                  min={0.1}
+                  max={5}
+                  step={0.1}
+                  value={[rotationSpeed]}
+                  onValueChange={(value) => {
+                    setRotationSpeed(value[0]);
+                    playHit();
+                  }}
+                />
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="wireframe"
+                  checked={wireframe}
+                  onCheckedChange={(checked) => {
+                    setWireframe(checked);
+                    playHit();
+                  }}
+                />
+                <Label htmlFor="wireframe">Wireframe Mode</Label>
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="autorotate"
+                  checked={autoRotate}
+                  onCheckedChange={(checked) => {
+                    setAutoRotate(checked);
+                    playHit();
+                  }}
+                />
+                <Label htmlFor="autorotate">Auto Rotate</Label>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default Controls;
