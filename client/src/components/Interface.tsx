@@ -9,12 +9,12 @@ import { useAudio } from "../lib/stores/useAudio";
 
 const Interface: React.FC = () => {
   const [showCode, setShowCode] = useState(false);
-  const { playSuccessSound } = useAudio();
+  const { playSuccess } = useAudio();
   const { isKnotMode } = useTorusStore();
 
   const toggleCodeDisplay = () => {
     setShowCode(!showCode);
-    playSuccessSound();
+    playSuccess();
   };
 
   const openGithubRepo = () => {
