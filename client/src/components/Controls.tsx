@@ -53,10 +53,10 @@ export const Controls: React.FC = () => {
   };
 
   return (
-    <Card className="w-full rounded-t-none rounded-b-lg bg-background/95 backdrop-blur-sm border-t-0">
+    <Card className="w-full rounded-t-none rounded-b-lg bg-background/90 backdrop-blur-sm border-t-0 shadow-lg border border-primary/20">
       <CardContent className="p-4">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="font-semibold text-lg text-foreground">Shape Controls</h3>
+          <h3 className="font-semibold text-lg text-primary">Shape Controls</h3>
           <div className="flex items-center gap-2">
             {/* Shape toggles for Torus, Knot, and Weird shape */}
             <Toggle
@@ -159,16 +159,16 @@ export const Controls: React.FC = () => {
         <Separator className="my-2" />
         
         <Tabs defaultValue="shape" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-4">
-            <TabsTrigger value="shape">Shape</TabsTrigger>
-            <TabsTrigger value="appearance">Appearance</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-4 bg-primary/10">
+            <TabsTrigger value="shape" className="font-semibold data-[state=active]:bg-primary/20">Shape</TabsTrigger>
+            <TabsTrigger value="appearance" className="font-semibold data-[state=active]:bg-primary/20">Appearance</TabsTrigger>
           </TabsList>
           
           <TabsContent value="shape" className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <Label htmlFor="radius">Radius: {radius.toFixed(1)}</Label>
+                  <Label htmlFor="radius" className="font-semibold text-foreground">Radius: <span className="text-primary">{radius.toFixed(1)}</span></Label>
                 </div>
                 <Slider
                   id="radius"
@@ -185,7 +185,7 @@ export const Controls: React.FC = () => {
               
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <Label htmlFor="tubeRadius">Tube Radius: {tubeRadius.toFixed(2)}</Label>
+                  <Label htmlFor="tubeRadius" className="font-semibold text-foreground">Tube Radius: <span className="text-primary">{tubeRadius.toFixed(2)}</span></Label>
                 </div>
                 <Slider
                   id="tubeRadius"
@@ -202,7 +202,7 @@ export const Controls: React.FC = () => {
               
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <Label htmlFor="radialSegments">Radial Segments: {Math.round(radialSegments)}</Label>
+                  <Label htmlFor="radialSegments" className="font-semibold text-foreground">Radial Segments: <span className="text-primary">{Math.round(radialSegments)}</span></Label>
                 </div>
                 <Slider
                   id="radialSegments"
@@ -219,7 +219,7 @@ export const Controls: React.FC = () => {
               
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <Label htmlFor="tubularSegments">Tubular Segments: {Math.round(tubularSegments)}</Label>
+                  <Label htmlFor="tubularSegments" className="font-semibold text-foreground">Tubular Segments: <span className="text-primary">{Math.round(tubularSegments)}</span></Label>
                 </div>
                 <Slider
                   id="tubularSegments"
@@ -240,7 +240,7 @@ export const Controls: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <Label htmlFor="color">Color</Label>
+                  <Label htmlFor="color" className="font-semibold text-foreground">Color</Label>
                 </div>
                 <div className="flex items-center gap-2">
                   <input
@@ -256,7 +256,7 @@ export const Controls: React.FC = () => {
               
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <Label htmlFor="rotationSpeed">Rotation Speed: {rotationSpeed.toFixed(1)}</Label>
+                  <Label htmlFor="rotationSpeed" className="font-semibold text-foreground">Rotation Speed: <span className="text-primary">{rotationSpeed.toFixed(1)}</span></Label>
                 </div>
                 <Slider
                   id="rotationSpeed"
@@ -280,7 +280,7 @@ export const Controls: React.FC = () => {
                     playHit();
                   }}
                 />
-                <Label htmlFor="wireframe">Wireframe Mode</Label>
+                <Label htmlFor="wireframe" className="font-semibold text-foreground">Wireframe Mode</Label>
               </div>
               
               <div className="flex items-center space-x-2">
