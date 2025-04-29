@@ -1,6 +1,10 @@
 # Interactive 3D Shape Explorer
 
 An interactive single-page React application showcasing 3D geometric visualizations using Three.js and React Three Fiber. This application provides an educational and engaging platform for exploring 3D shapes with dynamic code display and interactive controls.
+<img width="1440" alt="Screenshot 2025-04-29 at 7 40 56 PM" src="https://github.com/user-attachments/assets/fe79583c-bfcc-4139-88c7-bd4f0d96caa0" />
+![Uploading Screenshot 2025-04-29 at 7.41.13 PM.png…]()
+
+
 
 ## Features
 - Interactive 3D shapes (Torus, Torus Knot, and Weird Shape)
