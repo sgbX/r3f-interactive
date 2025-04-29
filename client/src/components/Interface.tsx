@@ -18,8 +18,8 @@ const Interface: React.FC = () => {
   };
 
   const openGithubRepo = () => {
-    window.open("https://github.com/pmndrs/react-three-fiber", "_blank", "noopener,noreferrer");
-    toast.success("Opening React Three Fiber GitHub repo", {
+    window.open("https://github.com/sgbX", "_blank", "noopener,noreferrer");
+    toast.success("Opening sgbX's GitHub profile", {
       duration: 3000,
       position: "top-center"
     });
@@ -92,7 +92,7 @@ const Interface: React.FC = () => {
             className="rounded-full bg-background/80 backdrop-blur-sm"
             onClick={openGithubRepo}
             aria-label="GitHub"
-            title="Open GitHub repository"
+            title="Visit sgbX's GitHub profile"
           >
             <Github size={20} />
             <span className="sr-only">GitHub</span>
