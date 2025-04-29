@@ -292,7 +292,7 @@ export const Controls: React.FC = () => {
                     playHit();
                   }}
                 />
-                <Label htmlFor="autorotate">Auto Rotate</Label>
+                <Label htmlFor="autorotate" className="font-semibold text-foreground">Auto Rotate</Label>
               </div>
             </div>
           </TabsContent>

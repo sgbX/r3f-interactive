@@ -63,7 +63,7 @@ const Interface: React.FC = () => {
       {/* Top Header */}
       <div className="absolute top-0 left-0 w-full p-4 flex justify-between items-center pointer-events-auto">
         <div className="flex items-center gap-2">
-          <div className="bg-background/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md">
+          <div className="bg-background/85 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-primary/20">
             <h1 className="text-xl md:text-2xl font-bold text-primary">
               {getShapeTitle()}
             </h1>
@@ -77,7 +77,7 @@ const Interface: React.FC = () => {
           <Button
             variant="outline"
             size="icon"
-            className="rounded-full bg-background/80 backdrop-blur-sm"
+            className="rounded-full bg-background/85 backdrop-blur-sm shadow-md border border-primary/10"
             onClick={showInfo}
             aria-label="Information"
             title="About this app"
@@ -89,7 +89,7 @@ const Interface: React.FC = () => {
           <Button
             variant="outline"
             size="icon"
-            className="rounded-full bg-background/80 backdrop-blur-sm"
+            className="rounded-full bg-background/85 backdrop-blur-sm shadow-md border border-primary/10"
             onClick={openGithubRepo}
             aria-label="GitHub"
             title="Visit sgbX's GitHub profile"
@@ -100,7 +100,7 @@ const Interface: React.FC = () => {
           
           <Button
             variant={showCode ? "default" : "outline"}
-            className="rounded-full bg-background/80 backdrop-blur-sm"
+            className="rounded-full bg-background/85 backdrop-blur-sm shadow-md border border-primary/10"
             onClick={toggleCodeDisplay}
             aria-label={showCode ? "Hide Code" : "View Code"}
             title={showCode ? "Hide code display" : "View source code"}
