@@ -34,6 +34,9 @@ const Interface: React.FC = () => {
           Modify the 3D shape properties using the controls and view the source code to learn how it works!
         </p>
         <p className="text-xs text-muted-foreground mt-2">
+          <strong>Interaction:</strong> Click and drag to rotate the shape. Use the scroll wheel to zoom in/out.
+        </p>
+        <p className="text-xs text-muted-foreground">
           Try switching between different shape modes using the toggle buttons.
         </p>
       </div>,

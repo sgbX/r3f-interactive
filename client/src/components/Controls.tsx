@@ -67,7 +67,7 @@ export const Controls: React.FC = () => {
               }}
               aria-label="Torus Mode"
               title="Switch to Torus"
-              className="w-9 h-9 bg-primary/20 hover:bg-primary/30 shadow-md border border-primary/30"
+              className="w-9 h-9 bg-primary/20 hover:bg-primary/40 hover:border-primary/60 transition-all shadow-md border border-primary/30"
             >
               <CircleOff size={18} className="text-foreground" />
             </Toggle>
@@ -80,7 +80,7 @@ export const Controls: React.FC = () => {
               }}
               aria-label="Knot Mode"
               title="Switch to Torus Knot"
-              className="w-9 h-9 bg-primary/20 hover:bg-primary/30 shadow-md border border-primary/30"
+              className="w-9 h-9 bg-primary/20 hover:bg-primary/40 hover:border-primary/60 transition-all shadow-md border border-primary/30"
             >
               <Rotate3D size={18} className="text-foreground" />
             </Toggle>
@@ -93,7 +93,7 @@ export const Controls: React.FC = () => {
               }}
               aria-label="Weird Shape Mode"
               title="Switch to Weird Shape"
-              className="w-9 h-9 bg-primary/20 hover:bg-primary/30 shadow-md border border-primary/30"
+              className="w-9 h-9 bg-primary/20 hover:bg-primary/40 hover:border-primary/60 transition-all shadow-md border border-primary/30"
             >
               <Box size={18} className="text-foreground" />
             </Toggle>
@@ -103,7 +103,7 @@ export const Controls: React.FC = () => {
               onPressedChange={setAutoRotate}
               aria-label="Toggle Auto Rotation"
               title="Toggle Auto Rotation"
-              className="w-9 h-9 bg-primary/20 hover:bg-primary/30 shadow-md border border-primary/30"
+              className="w-9 h-9 bg-primary/20 hover:bg-primary/40 hover:border-primary/60 transition-all shadow-md border border-primary/30"
               onClick={() => playHit()}
             >
               <RefreshCw size={18} className="text-foreground" />
@@ -114,7 +114,7 @@ export const Controls: React.FC = () => {
               onPressedChange={setIsAnimating}
               aria-label="Toggle Animation"
               title="Toggle Pulse Animation"
-              className="w-9 h-9 bg-primary/20 hover:bg-primary/30 shadow-md border border-primary/30"
+              className="w-9 h-9 bg-primary/20 hover:bg-primary/40 hover:border-primary/60 transition-all shadow-md border border-primary/30"
               onClick={() => playHit()}
             >
               {isAnimating ? <Pause size={18} className="text-foreground" /> : <Play size={18} className="text-foreground" />}
@@ -125,7 +125,7 @@ export const Controls: React.FC = () => {
               onPressedChange={setWireframe}
               aria-label="Toggle Wireframe"
               title="Toggle Wireframe Mode"
-              className="w-9 h-9 bg-primary/20 hover:bg-primary/30 shadow-md border border-primary/30"
+              className="w-9 h-9 bg-primary/20 hover:bg-primary/40 hover:border-primary/60 transition-all shadow-md border border-primary/30"
               onClick={() => playHit()}
             >
               {wireframe ? <Eye size={18} className="text-foreground" /> : <EyeOff size={18} className="text-foreground" />}
@@ -139,7 +139,7 @@ export const Controls: React.FC = () => {
                 resetToDefaults();
                 playHit();
               }}
-              className="w-9 h-9 bg-primary/20 hover:bg-primary/30 shadow-md border border-primary/30"
+              className="w-9 h-9 bg-primary/20 hover:bg-primary/40 hover:border-primary/60 transition-all shadow-md border border-primary/30"
             >
               <RefreshCw size={18} className="text-foreground" />
             </Button>
@@ -149,7 +149,7 @@ export const Controls: React.FC = () => {
               size="icon"
               title={isMuted ? "Unmute" : "Mute"}
               onClick={toggleMute}
-              className="w-9 h-9 bg-primary/20 hover:bg-primary/30 shadow-md border border-primary/30"
+              className="w-9 h-9 bg-primary/20 hover:bg-primary/40 hover:border-primary/60 transition-all shadow-md border border-primary/30"
             >
               {isMuted ? <VolumeX size={18} className="text-foreground" /> : <Volume2 size={18} className="text-foreground" />}
             </Button>
@@ -160,8 +160,18 @@ export const Controls: React.FC = () => {
         
         <Tabs defaultValue="shape" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-4 bg-primary/10">
-            <TabsTrigger value="shape" className="font-semibold data-[state=active]:bg-primary/20">Shape</TabsTrigger>
-            <TabsTrigger value="appearance" className="font-semibold data-[state=active]:bg-primary/20">Appearance</TabsTrigger>
+            <TabsTrigger 
+              value="shape" 
+              className="font-semibold text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-colors data-[state=active]:bg-primary/25 data-[state=active]:text-foreground"
+            >
+              Shape
+            </TabsTrigger>
+            <TabsTrigger 
+              value="appearance" 
+              className="font-semibold text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-colors data-[state=active]:bg-primary/25 data-[state=active]:text-foreground"
+            >
+              Appearance
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="shape" className="space-y-4">
