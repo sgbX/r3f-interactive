@@ -18,8 +18,8 @@ const Interface: React.FC = () => {
   };
 
   const openGithubRepo = () => {
-    window.open("https://github.com/sgbX", "_blank", "noopener,noreferrer");
-    toast.success("Opening sgbX's GitHub profile", {
+    window.open("https://github.com/YOUR_USERNAME", "_blank", "noopener,noreferrer");
+    toast.success("Opening my GitHub profile", {
       duration: 3000,
       position: "top-center"
     });
@@ -30,8 +30,8 @@ const Interface: React.FC = () => {
       <div className="space-y-2">
         <p className="font-semibold">Interactive 3D Shape Explorer</p>
         <p>
-          This application demonstrates the capabilities of React Three Fiber and Three.js.
-          Modify the 3D shape properties using the controls and view the source code to learn how it works!
+          I built this application to explore 3D graphics with React Three Fiber and Three.js.
+          You can modify the shape properties and view my source code to see how I implemented it!
         </p>
         <p className="text-xs text-muted-foreground mt-2">
           <strong>Interaction:</strong> Click and drag to rotate the shape. Use the scroll wheel to zoom in/out.
@@ -71,7 +71,7 @@ const Interface: React.FC = () => {
               {getShapeTitle()}
             </h1>
             <p className="text-sm text-muted-foreground">
-              Created by {new Date().getFullYear()}
+              Created by me, {new Date().getFullYear()}
             </p>
           </div>
         </div>
@@ -95,7 +95,7 @@ const Interface: React.FC = () => {
             className="rounded-full bg-background/85 backdrop-blur-sm shadow-md border border-primary/10"
             onClick={openGithubRepo}
             aria-label="GitHub"
-            title="Visit sgbX's GitHub profile"
+            title="Visit my GitHub profile"
           >
             <Github size={20} />
             <span className="sr-only">GitHub</span>
